@@ -17,14 +17,15 @@ export default createStore({
 
         sendRequest(context, payload) {
             // Send request to the backend with the contents of the textarea
-            fetch("/backend/endpoint", {
-              method: "POST",
-              body: JSON.stringify({
-                text: payload,
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
+            fetch("http://127.0.0.1:4000/api", {
+                method: "POST",
+                body: JSON.stringify({
+                    string: payload,
+                    char: 'Hatter'
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -32,7 +33,7 @@ export default createStore({
                 })
                 .catch((error) => {
                     console.error(error);
-            });
+                });
         }
     },
     getters: {

@@ -78,7 +78,6 @@ function generateEncodedParams(text, character) {
 export const generateAudio = async (req, res) => {
   let { string, char } = req.body;
   const encodedParams = generateEncodedParams(string, char)
-  // const fetch = require('node-fetch');
   const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
   const options = {
     method: 'POST',
@@ -92,8 +91,6 @@ export const generateAudio = async (req, res) => {
   fetch(url, options)
     .then(res => res.json())
     .then(jsonObj => {
-      // console.log(jsonObj)
-      res.status(200).json({ result: jsonObj });
+      res.status(200).send(jsonObj);
     }).catch(err => console.error('error:' + err));
 }
-

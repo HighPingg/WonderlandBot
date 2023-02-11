@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <BGComponent />
-    <TextboxComponent />
-  </div>
+  <!-- <BGComponent /> -->
+  <TextboxComponent />
 </template>
 
 <script>
-import BGComponent from "./components/BG.vue";
+// import BGComponent from "./components/BG.vue";
 import TextboxComponent from "./components/Textbox.vue";
 
 export default {
   name: "App",
   components: {
-    BGComponent,
+    // BGComponent,
     TextboxComponent,
   },
 };
@@ -27,4 +25,11 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 } */
+
+#app {
+  background-image: url("assets/bg.png");
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
 </style>

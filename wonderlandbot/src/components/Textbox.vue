@@ -23,7 +23,9 @@ export default {
       // Send request to the backend with the contents of the textarea
       fetch("/backend/endpoint", {
         method: "POST",
-        body: JSON.stringify({ text: this.text }),
+        body: JSON.stringify({
+          text: this.text,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -50,5 +52,12 @@ textarea {
   text-align: center;
   resize: none;
   border: 0px;
+  background-color: transparent;
+  color: #fdfdfd;
+}
+
+/* Remove border on focus */
+textarea:focus {
+  outline: none;
 }
 </style>

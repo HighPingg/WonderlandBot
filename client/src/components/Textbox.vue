@@ -1,17 +1,17 @@
 <template>
-  <div class="textbox-container">
-    <textarea
-      rows="4"
-      cols="50"
-      placeholder="Enter text here"
-      v-model="text"
-      @keydown.enter="sendRequest"
-    ></textarea>
-  </div>
+  <textarea
+    rows="4"
+    cols="50"
+    placeholder="Enter text here"
+    v-model="text"
+    @keydown.enter="sendRequest"
+    @keydown.enter.prevent="postReply"
+  >
+  </textarea>
 </template>
 
 <script>
-import store from '@/store/store';
+import store from "@/store/store";
 
 export default {
   name: "TextboxComponent",
@@ -21,7 +21,12 @@ export default {
     };
   },
   methods: {
-    sendRequest() { store.dispatch('sendRequest', this.text) }
+    sendRequest() {
+      // We can use the store to send the request
+      store.dispatch("sendRequest", this.text);
+      // Clear the text
+      this.text = "";
+    },
   },
 };
 </script>

@@ -1,16 +1,13 @@
 <template>
-  <!-- <BGComponent /> -->
   <TextboxComponent />
 </template>
 
 <script>
-// import BGComponent from "./components/BG.vue";
 import TextboxComponent from "./components/Textbox.vue";
 
 export default {
   name: "App",
   components: {
-    // BGComponent,
     TextboxComponent,
   },
 };

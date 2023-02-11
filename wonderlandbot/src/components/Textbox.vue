@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import store from '@/store/store';
+
 export default {
   name: "TextboxComponent",
   data() {
@@ -19,25 +21,7 @@ export default {
     };
   },
   methods: {
-    sendRequest() {
-      // Send request to the backend with the contents of the textarea
-      fetch("/backend/endpoint", {
-        method: "POST",
-        body: JSON.stringify({
-          text: this.text,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+    sendRequest() { store.dispatch('sendRequest', this.text) }
   },
 };
 </script>

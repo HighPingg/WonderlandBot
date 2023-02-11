@@ -2,7 +2,7 @@ import { Configuration, OpenAIApi } from "openai";
 import dotenv from 'dotenv';
 
 dotenv.config();
-console.log(process.env.RAPIDAPI_KEY);
+// console.log(process.env.RAPIDAPI_KEY);
 // console.log(process.env.OPENAI_API_KEY);
 
 const configuration = new Configuration({

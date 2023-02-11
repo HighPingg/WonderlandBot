@@ -83,7 +83,7 @@ export const generateAudio = async (req, res) => {
     method: 'POST',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Key': process.env.RapidAPI_Key,
+      'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
       'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
     },
     body: encodedParams

@@ -60,3 +60,47 @@ export const generatePrompt = async (req, res) => {
   }
 }
 
+//Creates EncodedParams for generating audio
+function generateEncodedParams(text, character) {
+  const encodedParams = new URLSearchParams();
+
+  switch (character) {
+    case characters.Alice:
+        encodedParams.append("voice_code", "en-US-3");
+        encodedParams.append("speed", ".90");
+        encodedParams.append("pitch", ".80");
+        break
+    case characters.Hatter:
+        encodedParams.append("voice_code", "en-US-1");
+        encodedParams.append("speed", "1.00");
+        encodedParams.append("pitch", "1.00");
+        break
+  }
+
+  encodedParams.append("text", text);
+  encodedParams.append("output_type", "base64");
+  return encodedParams
+
+}
+//Generates audio from the api request in base64 format
+//Takes request as string and char
+export const generateAudio = async (req, res) => {
+  let {string, char} = req.body;
+  const encodedParams = generateEncodedParams(string,char)
+  const fetch = require('node-fetch');
+  const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
+  const options = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': 'Put key here',
+      'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
+    },
+    body: encodedParams
+  };
+  fetch(url, options)
+    .then(res => res.json())
+    .then(json => console.log(json))
+    .catch(err => console.error('error:' + err));
+  }
+  

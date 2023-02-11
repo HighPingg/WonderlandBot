@@ -21,10 +21,11 @@ export default {
   methods: {
     sendRequest() {
       // Send request to the backend with the contents of the textarea
-      fetch("/backend/endpoint", {
+      fetch("http://127.0.0.1:4000/api", {
         method: "POST",
         body: JSON.stringify({
-          text: this.text,
+          string: this.text,
+          char: 'Hatter'
         }),
         headers: {
           "Content-Type": "application/json",

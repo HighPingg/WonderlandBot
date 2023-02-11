@@ -1,9 +1,16 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express()
-import { generatePrompt } from './api/index.js'
+import { generateAudio } from './api/index.js'
 const port = 4000;
-app.post('/api', generatePrompt);
+
+app.use(cors({
+    origin: ["http://localhost:8080"],
+}))
+app.use(express.json())
+
+app.post('/api', generateAudio);
 
 
 

@@ -15,6 +15,7 @@ function generateString(prompt, character) {
   }
 }
 
+
 export const generatePrompt = async (req, res) => {
   let { string, char } = req.body;
 
@@ -27,20 +28,10 @@ export const generatePrompt = async (req, res) => {
     return;
   }
 
-  let characterCase;
-  switch (char) {
-    case 'Alice':
-      obj = characters.Alice;
-      break;
-    case 'Hatter':
-      obj = characters.Hatter;
-      break;
-  }
-
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generateString(string, characterCase),
+      prompt: generateString(string, char),
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -66,15 +57,15 @@ function generateEncodedParams(text, character) {
 
   switch (character) {
     case characters.Alice:
-        encodedParams.append("voice_code", "en-US-3");
-        encodedParams.append("speed", ".90");
-        encodedParams.append("pitch", ".80");
-        break
+      encodedParams.append("voice_code", "en-US-3");
+      encodedParams.append("speed", ".90");
+      encodedParams.append("pitch", ".80");
+      break
     case characters.Hatter:
-        encodedParams.append("voice_code", "en-US-1");
-        encodedParams.append("speed", "1.00");
-        encodedParams.append("pitch", "1.00");
-        break
+      encodedParams.append("voice_code", "en-US-1");
+      encodedParams.append("speed", "1.00");
+      encodedParams.append("pitch", "1.00");
+      break
   }
 
   encodedParams.append("text", text);
@@ -85,22 +76,24 @@ function generateEncodedParams(text, character) {
 //Generates audio from the api request in base64 format
 //Takes request as string and char
 export const generateAudio = async (req, res) => {
-  let {string, char} = req.body;
-  const encodedParams = generateEncodedParams(string,char)
-  const fetch = require('node-fetch');
+  let { string, char } = req.body;
+  const encodedParams = generateEncodedParams(string, char)
+  // const fetch = require('node-fetch');
   const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
   const options = {
     method: 'POST',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Key': 'Put key here',
+      'X-RapidAPI-Key': 'Put Key Here',
       'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
     },
     body: encodedParams
   };
   fetch(url, options)
     .then(res => res.json())
-    .then(json => console.log(json))
-    .catch(err => console.error('error:' + err));
-  }
-  
+    .then(jsonObj => {
+      // console.log(jsonObj)
+      res.status(200).json({ result: jsonObj });
+    }).catch(err => console.error('error:' + err));
+}
+

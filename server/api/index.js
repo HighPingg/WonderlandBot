@@ -1,15 +1,9 @@
-import { Configuration, OpenAIApi } from "openai";
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+import {openai} from "../ai.js";
 
 const characters = {
     Alice: "Alice",
     Hatter: "Hatter"
 }
-
 
 //prompt is a string and character is a passed enum
 function generateString(prompt, character) {

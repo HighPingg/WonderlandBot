@@ -1,4 +1,4 @@
-import { openai } from "../ai.js";
+import { openai, speechKey } from "../ai.js";
 
 const characters = {
   Alice: "Alice",
@@ -83,7 +83,7 @@ export const generateAudio = async (req, res) => {
     method: 'POST',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+      'X-RapidAPI-Key': speechKey,
       'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
     },
     body: encodedParams

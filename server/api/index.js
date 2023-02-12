@@ -11,7 +11,7 @@ function generateString(prompt, character) {
     case characters.Alice:
       return prompt + " in the style of Alice from Alice in the Wonderland"
     case characters.Hatter:
-      return "Pretend you are the Mad Hatter from Alice in the Wonderland. Answer in 10 words or less." + prompt
+      return "Pretend you are the Mad Hatter. " + prompt
       // return prompt + " in the style of the Mad Hatter from Alice in the Wonderland. Answer in complete sentences."
   }
 }
@@ -20,7 +20,7 @@ function generateString(prompt, character) {
 const generatePrompt = async (string, char) => {
   try {
     const completion = await openai.createCompletion({
-      model: "text-ada-003",
+      model: "text-ada-001",
       prompt: generateString(string, char),
       temperature: 0.6,
     });

@@ -12,7 +12,7 @@ function generateString(prompt, character) {
       return prompt + " in the style of Alice from Alice in the Wonderland"
     case characters.Hatter:
       return "Pretend you are the Mad Hatter. " + prompt
-      // return prompt + " in the style of the Mad Hatter from Alice in the Wonderland. Answer in complete sentences."
+    // return prompt + " in the style of the Mad Hatter from Alice in the Wonderland. Answer in complete sentences."
   }
 }
 
@@ -23,12 +23,13 @@ const generatePrompt = async (string, char) => {
       model: "text-ada-001",
       prompt: generateString(string, char),
       temperature: 0.6,
+      max_tokens: 100,
     });
     return completion.data.choices[0].text;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
-      throw new Error( error.response.data);
+      throw new Error(error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
       throw new Error('An error occurred during your request.');
@@ -61,20 +62,22 @@ function generateEncodedParams(text, character) {
 //Generates audio from the api request in base64 format
 //Takes request as string and char
 export const generateResponse = async (req, res) => {
-  let { string, char} = req.body;
+  let { string, char } = req.body;
   if (string.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid prompt",
+        message: "Please enter a valid prompt.",
       }
     });
     return;
   }
   let response;
-  try{
+  try {
     response = await generatePrompt(string, char);
+    console.log("OpenAI Response:")
+    console.log(response)
   }
-  catch(error){
+  catch (error) {
     res.status(400).json(error);
     return;
   }
@@ -98,28 +101,3 @@ export const generateResponse = async (req, res) => {
       })
     }).catch(err => console.error('error:' + err));
 }
-
-
-// export const generateResponse = async (req, res) => {
-//   let { string, char } = req.body;
-
-  
-  
-//   let generatedSound;
-//   try{
-//     generatedSound = await generateAudio();
-//   }
-//   catch(error){
-//     res.status(400).json(error);
-//     return;
-//   }
-
-//   let result = {
-//     ai: response, 
-//     audio: generatedSound
-//   }
-
-//   res.status(200).json(result);
-
-
-// }

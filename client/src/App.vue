@@ -21,7 +21,7 @@ export default {
   name: "App",
   components: {
     TextboxComponent,
-  }
+  },
 };
 </script>
 
@@ -31,5 +31,20 @@ export default {
   width: 100vw;
   height: 100vh;
   z-index: -1;
+}
+
+#aiResponse {
+  position: absolute;
+  top: 40%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1;
+  width: 250px;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 10px;
 }
 </style>

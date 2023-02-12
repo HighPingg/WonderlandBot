@@ -10,6 +10,13 @@ To use:
 6. The app is now avaliable on localhost:8080
 7. Enjoy!
 
+# Getting your api keys
+To get your openai api key, you must create an account. Then go the link https://platform.openai.com/account/api-keys and click "Create new API key". Copy paste that key into your .env file after OPENAI_API_KEY. 
+
+To get your Cloudlab Text to Speech api key, 
+
+
+
 Note: You need to have a node version of 18 or higher
 
 

@@ -10,5 +10,7 @@ To use:
 6. The app is now avaliable on localhost:8080
 7. Enjoy!
 
+Note: You need to have a node version of 18 or higher
+
 
 

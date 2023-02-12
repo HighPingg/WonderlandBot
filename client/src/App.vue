@@ -6,6 +6,7 @@
     >{{ $store.getters.aiResponse }}
   </span>
   <TextboxComponent />
+  <errorModal/>
   <audio
     id="test"
     v-if="$store.state.aiResponseAudio !== null"
@@ -16,12 +17,14 @@
 
 <script>
 import TextboxComponent from "./components/Textbox.vue";
+import errorModal from "./components/errorModal.vue"
 
 export default {
   name: "App",
   components: {
     TextboxComponent,
-  },
+    errorModal
+  }
 };
 </script>
 

@@ -1,3 +1,7 @@
+# Update: 
+
+Winner of the Looking Glass award at Hopper Hacks 2023!!!!!!!
+
 # Wonderland Bot
 
 To use:

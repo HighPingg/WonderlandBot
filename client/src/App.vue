@@ -39,7 +39,7 @@ export default {
 #aiResponse {
   position: absolute;
   top: 40%;
-  left: 70%;
+  left: 71%;
   transform: translate(-50%, -50%);
   font-size: 2rem;
   font-weight: bold;
@@ -49,5 +49,6 @@ export default {
   height: auto;
   border: 2px solid white;
   border-radius: 10px;
+  padding: 5px;
 }
 </style>

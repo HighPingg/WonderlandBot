@@ -74,8 +74,6 @@ export const generateResponse = async (req, res) => {
   let response;
   try {
     response = await generatePrompt(string, char);
-    console.log("OpenAI Response:")
-    console.log(response)
   }
   catch (error) {
     res.status(400).json(error);

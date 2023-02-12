@@ -3,12 +3,16 @@ import { createStore } from 'vuex'
 export default createStore({
     state: {
         persona: "Mad Hatter",
-        userMessages: [],
-        aiMessages: []
+        aiResponse: null,
+        aiResponseAudio: null
     },
     mutations: {
         UPDATE_PERSONA(state, payload) {
             state.persona = payload;
+        },
+        UPDATE_AI_RESPONSE(state, payload) {
+            state.aiResponse = payload.text;
+            state.aiResponseAudio = payload.audio;
         }
     },
     actions: {
@@ -30,7 +34,11 @@ export default createStore({
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
+                    if (data.audio.status == "success") {
+                        context.commit('UPDATE_AI_RESPONSE', {text: data.ai, audio: data.audio.result.audio_base64});
+                    } else {
+                        context.commit('UPDATE_AI_RESPONSE', {text: data.ai, audio: null});
+                    }
                 })
                 .catch((error) => {
                     console.error(error);
@@ -40,6 +48,9 @@ export default createStore({
     getters: {
         persona: function (state) {
             return `${state.persona}`
+        },
+        aiResponse: function (state) {
+            return `${state.aiResponse}`
         }
     }
 })

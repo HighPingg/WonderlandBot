@@ -1,4 +1,5 @@
 <template>
+  <p style="color: white">{{ $store.getters.aiResponse }}</p>
   <TextboxComponent />
 </template>
 

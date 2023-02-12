@@ -59,7 +59,7 @@ function generateEncodedParams(text, character) {
 }
 //Generates audio from the api request in base64 format
 //Takes request as string and char
-const generateAudio = async (req, res) => {
+const generateAudio = async () => {
   let { string, char } = req.body;
   const encodedParams = generateEncodedParams(string, char)
   const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';

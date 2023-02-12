@@ -92,7 +92,7 @@ export const generateResponse = async (req, res) => {
     .then(res => res.json())
     .then(jsonObj => {
       res.status(200).json({
-        ai: response,
+        ai: response.trim(),
         audio: jsonObj
       })
     }).catch(err => console.error('error:' + err));

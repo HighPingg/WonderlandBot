@@ -31,6 +31,7 @@ export default {
 <style>
 #app {
   background-image: url("assets/bg.png");
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   z-index: -1;

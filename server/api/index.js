@@ -9,9 +9,10 @@ const characters = {
 function generateString(prompt, character) {
   switch (character) {
     case characters.Alice:
-      return prompt + "in the style of Alice from Alice in the Wonderland"
+      return prompt + " in the style of Alice from Alice in the Wonderland"
     case characters.Hatter:
-      return prompt + "in the style of the Mad Hatter from Alice in the Wonderland"
+      return "Pretend you are the Mad Hatter from Alice in the Wonderland. Answer in 10 words or less." + prompt
+      // return prompt + " in the style of the Mad Hatter from Alice in the Wonderland. Answer in complete sentences."
   }
 }
 

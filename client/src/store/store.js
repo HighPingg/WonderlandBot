@@ -35,9 +35,10 @@ export default createStore({
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.audio.status == "success") {
-                        context.commit('UPDATE_AI_RESPONSE', {text: data.ai, audio: data.audio.result.audio_base64});
+                        context.commit('UPDATE_AI_RESPONSE', { text: data.ai, audio: "data:audio/wav;base64," + data.audio.result.audio_base64 });
+                        console.log(context.store.state.aiResponseAudio);
                     } else {
-                        context.commit('UPDATE_AI_RESPONSE', {text: data.ai, audio: null});
+                        context.commit('UPDATE_AI_RESPONSE', { text: data.ai, audio: null });
                     }
                 })
                 .catch((error) => {
@@ -51,6 +52,9 @@ export default createStore({
         },
         aiResponse: function (state) {
             return `${state.aiResponse}`
+        },
+        aiResponseAudio: function (state) {
+            return `${state.aiResponseAudio}`
         }
     }
 })

@@ -88,7 +88,7 @@ export const generateResponse = async (req, res) => {
     },
     body: encodedParams
   };
-  return fetch(url, options)
+  fetch(url, options)
     .then(res => res.json())
     .then(jsonObj => {
       res.status(200).json({

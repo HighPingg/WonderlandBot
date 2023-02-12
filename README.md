@@ -4,6 +4,8 @@ Winner of the Looking Glass award at Hopper Hacks 2023!!!!!!!
 
 # Wonderland Bot
 
+Created by Vincent Zheng, Muhammad Usman Rehan, Kevin Wei and Dylan Gold. 
+
 To use:
 1. git clone this repository
 2. open a terminal and go into the server folder and run npm install

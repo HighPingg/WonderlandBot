@@ -1,7 +1,7 @@
 <template>
   <transition 
   name="modal-fade"
-  v-if ="$store.state.errorMessage!=null" > 
+  v-if ="!$store.state && $store.state.errorMessage!=null" > 
     <div class="modal-backdrop">
       <div class="modal"
         role="dialog"

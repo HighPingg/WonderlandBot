@@ -47,9 +47,9 @@ function generateEncodedParams(text, character) {
       encodedParams.append("pitch", "1.00");
       break
     case characters.Hatter:
-      encodedParams.append("voice_code", "en-US-3");
-      encodedParams.append("speed", ".90");
-      encodedParams.append("pitch", ".80");
+      encodedParams.append("voice_code", "en-US-13");
+      encodedParams.append("speed", ".85");
+      encodedParams.append("pitch", ".90");
       break
   }
 

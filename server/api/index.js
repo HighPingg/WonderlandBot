@@ -20,7 +20,7 @@ function generateString(prompt, character) {
 const generatePrompt = async (string, char) => {
   try {
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
+      model: "text-ada-003",
       prompt: generateString(string, char),
       temperature: 0.6,
     });

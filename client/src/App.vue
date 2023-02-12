@@ -46,7 +46,9 @@ export default {
   text-align: center;
   z-index: 1;
   width: 250px;
-  height: auto;
+  /* height: auto; */
+  max-height: 250px;
+  overflow-y: auto;
   border: 2px solid white;
   border-radius: 10px;
   padding: 5px;

@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
     state: {
         persona: "Mad Hatter",
-        userMessages: []
+        userMessages: [],
+        aiMessages: []
     },
     mutations: {
         UPDATE_PERSONA(state, payload) {

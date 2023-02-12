@@ -16,37 +16,21 @@ function generateString(prompt, character) {
 }
 
 
-export const generatePrompt = async (req, res) => {
-  let { string, char } = req.body;
-
-  if (string.trim().length === 0) {
-    res.status(400).json({
-      error: {
-        message: "Please enter a valid animal",
-      }
-    });
-    return;
-  }
-
+const generatePrompt = async (string, char) => {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generateString(string, char),
       temperature: 0.6,
     });
-    res.status(200).json({ result: completion.data.choices[0].text });
+    return completion.data.choices[0].text;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
-      console.error(error.response.status, error.response.data);
-      res.status(error.response.status).json(error.response.data);
+      throw new Error( error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
-      res.status(400).json({
-        error: {
-          message: 'An error occurred during your request.',
-        }
-      });
+      throw new Error('An error occurred during your request.');
     }
   }
 }
@@ -75,7 +59,7 @@ function generateEncodedParams(text, character) {
 }
 //Generates audio from the api request in base64 format
 //Takes request as string and char
-export const generateAudio = async (req, res) => {
+const generateAudio = async (req, res) => {
   let { string, char } = req.body;
   const encodedParams = generateEncodedParams(string, char)
   const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
@@ -93,4 +77,45 @@ export const generateAudio = async (req, res) => {
     .then(jsonObj => {
       res.status(200).send(jsonObj);
     }).catch(err => console.error('error:' + err));
+}
+
+
+export const generateResponse = async (req, res) => {
+  let { string, char } = req.body;
+  string = string.replace(/^\s+|\s+$/g, '');
+
+  if (string.trim().length === 0) {
+    res.status(400).json({
+      error: {
+        message: "Please enter a valid prompt",
+      }
+    });
+    return;
+  }
+  let response;
+  try{
+    response = await generatePrompt(string, char);
+  }
+  catch(error){
+    res.status(400).json(error);
+    return;
+  }
+  
+  let generatedSound;
+  try{
+    generatedSound = await generateAudio();
+  }
+  catch(error){
+    res.status(400).json(error);
+    return;
+  }
+
+  let result = {
+    ai: response, 
+    audio: generatedSound
+  }
+
+  res.status(200).json(result);
+
+
 }

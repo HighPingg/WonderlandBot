@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 const app = express()
-import { generateAudio } from './api/index.js'
+import { generateResponse } from './api/index.js'
 const port = 4000;
 
 app.use(cors({
@@ -10,7 +10,7 @@ app.use(cors({
 }))
 app.use(express.json())
 
-app.post('/api', generateAudio);
+app.post('/api', generateResponse);
 
 
 

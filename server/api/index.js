@@ -25,6 +25,7 @@ const generatePrompt = async (string, char) => {
       temperature: 0.6,
       max_tokens: 100,
     });
+    // console.log(JSON.stringify(completion.data.choices, null, 2));
     return completion.data.choices[0].text;
   } catch (error) {
     // Consider adjusting the error handling logic for your use case

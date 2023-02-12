@@ -42,14 +42,14 @@ function generateEncodedParams(text, character) {
 
   switch (character) {
     case characters.Alice:
-      encodedParams.append("voice_code", "en-US-3");
-      encodedParams.append("speed", ".90");
-      encodedParams.append("pitch", ".80");
-      break
-    case characters.Hatter:
       encodedParams.append("voice_code", "en-US-1");
       encodedParams.append("speed", "1.00");
       encodedParams.append("pitch", "1.00");
+      break
+    case characters.Hatter:
+      encodedParams.append("voice_code", "en-US-3");
+      encodedParams.append("speed", ".90");
+      encodedParams.append("pitch", ".80");
       break
   }
 

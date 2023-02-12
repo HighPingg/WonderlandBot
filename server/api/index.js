@@ -59,30 +59,8 @@ function generateEncodedParams(text, character) {
 }
 //Generates audio from the api request in base64 format
 //Takes request as string and char
-const generateAudio = async () => {
-  let { string, char } = req.body;
-  const encodedParams = generateEncodedParams(string, char)
-  const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
-  const options = {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Key': speechKey,
-      'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
-    },
-    body: encodedParams
-  };
-  fetch(url, options)
-    .then(res => res.json())
-    .then(jsonObj => {
-      res.status(200).send(jsonObj);
-    }).catch(err => console.error('error:' + err));
-}
-
-
 export const generateResponse = async (req, res) => {
-  let { string, char } = req.body;
-
+  let { string, char} = req.body;
   if (string.trim().length === 0) {
     res.status(400).json({
       error: {
@@ -99,22 +77,48 @@ export const generateResponse = async (req, res) => {
     res.status(400).json(error);
     return;
   }
-  
-  let generatedSound;
-  try{
-    generatedSound = await generateAudio();
-  }
-  catch(error){
-    res.status(400).json(error);
-    return;
-  }
-
-  let result = {
-    ai: response, 
-    audio: generatedSound
-  }
-
-  res.status(200).json(result);
-
-
+  const encodedParams = generateEncodedParams(response, char)
+  const url = 'https://cloudlabs-text-to-speech.p.rapidapi.com/synthesize';
+  const options = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': speechKey,
+      'X-RapidAPI-Host': 'cloudlabs-text-to-speech.p.rapidapi.com'
+    },
+    body: encodedParams
+  };
+  return fetch(url, options)
+    .then(res => res.json())
+    .then(jsonObj => {
+      res.status(200).json({
+        ai: response,
+        audio: jsonObj
+      })
+    }).catch(err => console.error('error:' + err));
 }
+
+
+// export const generateResponse = async (req, res) => {
+//   let { string, char } = req.body;
+
+  
+  
+//   let generatedSound;
+//   try{
+//     generatedSound = await generateAudio();
+//   }
+//   catch(error){
+//     res.status(400).json(error);
+//     return;
+//   }
+
+//   let result = {
+//     ai: response, 
+//     audio: generatedSound
+//   }
+
+//   res.status(200).json(result);
+
+
+// }

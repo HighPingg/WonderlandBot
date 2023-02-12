@@ -82,7 +82,6 @@ const generateAudio = async (req, res) => {
 
 export const generateResponse = async (req, res) => {
   let { string, char } = req.body;
-  string = string.replace(/^\s+|\s+$/g, '');
 
   if (string.trim().length === 0) {
     res.status(400).json({
